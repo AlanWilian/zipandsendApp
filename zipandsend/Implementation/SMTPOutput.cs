@@ -1,6 +1,8 @@
-﻿using System.Net;
+﻿using System.IO;
+using System.Net;
 using System.Net.Mail;
 using zipandsendApp.Interfaces;
+using zipandsendApp.View;
 
 namespace zipandsendApp.Implementation
 {
@@ -34,6 +36,19 @@ namespace zipandsendApp.Implementation
                     message.Subject = "";
                     message.Body = "";
                     message.IsBodyHtml = true;
+
+                    if (!string.IsNullOrEmpty(this.smtpOptions))
+                    {
+                        if (File.Exists(this.smtpOptions))
+                        {
+                            var attachment = new Attachment(this.smtpOptions);
+                            message.Attachments.Add(attachment);
+                        }
+                        else
+                        {
+                            CommandLineView.DisplayMessage("File not found");
+                        }
+                    }
 
                     client.Send(message);
                 }
