@@ -13,11 +13,9 @@ namespace zipandsendApp
         {
             try
             {
-                args = new string[] { "C:/Users/User/Desktop/source", "C:/Users/User/Desktop/output/output.zip", ".xls", "", "", "fileshare", "C:/Users/User/Desktop" };
-
                 if (args.Length < 2)
                 {
-                    CommandLineView.DisplayMessage("Usagesdffdf: ZipUtilityApp <SourceFolder> <OutputFile> [<ExcludedExtensions>] [<ExcludedDirectories>] [<ExcludedFiles>] [<OutputType>] [<OutputOptions>]");
+                    CommandLineView.DisplayMessage("Usage: zipandsendApp <SourceFolder> <OutputFile> [<ExcludedExtensions>] [<ExcludedDirectories>] [<ExcludedFiles>] [<OutputType>] [<OutputOptions>]");
                     return;
                 }
 
@@ -55,7 +53,7 @@ namespace zipandsendApp
             }
             catch (IOException e)
             {
-                CommandLineView.DisplayMessage($"Not supported: {e.Message}");
+                CommandLineView.DisplayMessage($"I/O error: {e.Message}");
             }
             catch (SecurityException e)
             {
